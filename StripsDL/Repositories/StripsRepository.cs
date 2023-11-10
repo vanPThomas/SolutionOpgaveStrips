@@ -37,6 +37,7 @@ namespace StripsDL.Repositories
                     dr.Read();
                     Reeks s = new Reeks((int)dr["Id"], (string)dr["Naam"]);
                     dr.Close();
+
                     return s;
                 }
                 catch (Exception ex)
