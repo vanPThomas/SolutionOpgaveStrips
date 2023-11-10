@@ -1,5 +1,4 @@
-﻿using StripsClientWPFReeksView.Model;
-using StripsClientWPFReeksView.Services;
+﻿using StripsClientWPFReeksView.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

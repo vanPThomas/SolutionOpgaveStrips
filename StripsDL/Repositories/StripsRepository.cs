@@ -1,5 +1,4 @@
-﻿using StripsBL.DTOs;
-using StripsBL.Interfaces;
+﻿using StripsBL.Interfaces;
 using StripsBL.Model;
 using StripsDL.Exceptions;
 using System;
@@ -63,10 +62,11 @@ namespace StripsDL.Repositories
                     while (reader.Read())
                     {
                         Strip strip = new Strip(
-                            (int)reader["Id"],
-                            (string)reader["Titel"],
-                            (int)reader["Nr"]
+                            Convert.ToInt32(reader["Id"]),
+                            reader["Titel"] as string,
+                            Convert.ToInt32(reader["Nr"])
                         );
+                        Console.WriteLine("Test!");
                         strips.Add(strip);
                     }
                     reader.Close();

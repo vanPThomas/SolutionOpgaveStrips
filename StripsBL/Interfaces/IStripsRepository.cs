@@ -1,5 +1,4 @@
-﻿using StripsBL.DTOs;
-using StripsBL.Model;
+﻿using StripsBL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
