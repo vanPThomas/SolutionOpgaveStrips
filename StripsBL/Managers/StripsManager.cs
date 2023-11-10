@@ -19,6 +19,28 @@ namespace StripsBL.Managers
             this.stripsRepository = stripsRepository;
         }
 
-       
+        public Reeks GeefReeksMetStrips(int id)
+        {
+            Reeks r;
+            List<Strip> strips = new List<Strip>();
+            try
+            {
+                r = stripsRepository.GeefReeks(id);
+            }
+            catch (Exception e)
+            {
+                throw new StripsManagerException("GeefReeksMetStrips REEKS", e);
+            }
+            try
+            {
+                strips = stripsRepository.GeefStripsVanReeks(id);
+            }
+            catch (Exception e)
+            {
+                throw new StripsManagerException("GeefReeksMetStrips STRIPS", e);
+            }
+            r.Strips = strips;
+            return r;
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace StripsDL.Repositories
                     cmd.Parameters.AddWithValue("@reeksID", reeksID);
                     IDataReader dr = cmd.ExecuteReader();
                     dr.Read();
-                    Reeks s = new Reeks((int)dr["Id"], (string)dr["Reeks"]);
+                    Reeks s = new Reeks((int)dr["Id"], (string)dr["Naam"]);
                     dr.Close();
                     return s;
                 }
@@ -74,7 +74,7 @@ namespace StripsDL.Repositories
                 }
                 catch (Exception ex)
                 {
-                    throw new StripsRepositoryException("geefstratengemeente", ex);
+                    throw new StripsRepositoryException("GeefStripsVanReeks", ex);
                 }
             }
         }
