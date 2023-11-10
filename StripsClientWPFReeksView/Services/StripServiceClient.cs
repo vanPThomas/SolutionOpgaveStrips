@@ -10,9 +10,6 @@ namespace StripsClientWPFReeksView.Services
     {
         private HttpClient client;
 
-        public StripServiceClient()
-        {
-
-        }        
+        public StripServiceClient() { }
     }
 }

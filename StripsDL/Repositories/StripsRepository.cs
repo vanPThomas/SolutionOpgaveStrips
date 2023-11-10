@@ -66,7 +66,6 @@ namespace StripsDL.Repositories
                             reader["Titel"] as string,
                             Convert.ToInt32(reader["Nr"])
                         );
-                        Console.WriteLine("Test!");
                         strips.Add(strip);
                     }
                     reader.Close();
