@@ -12,8 +12,15 @@ namespace StripsREST.Mappers
             try
             {
                 string reeksURL = $"{url}/{reeks.ID}";
-                List<string> strips = reeks.Strips.Select(x => reeksURL + $"/{x.ID}").ToList();
-                ReeksDTO dto = new ReeksDTO(reeksURL, reeks.Naam, strips.Count, strips);
+                List<StripDTO> strips = new List<StripDTO>();
+
+                foreach (Strip s in reeks.Strips)
+                {
+                    StripDTO stripDTO = new StripDTO((int)s.Nr, s.Titel, $"{url}/{s.ID}");
+                    strips.Add(stripDTO);
+                }
+
+                ReeksDTO dto = new ReeksDTO(reeksURL, reeks.Naam, reeks.Strips.Count, strips);
                 return dto;
             }
             catch (Exception ex)
