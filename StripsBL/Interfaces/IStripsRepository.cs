@@ -10,6 +10,7 @@ namespace StripsBL.Interfaces
 {
     public interface IStripsRepository
     {
-        
+        public Reeks GeefReeks(int reeksID);
+        public List<Strip> GeefStripsVanReeks(int id);
     }
 }

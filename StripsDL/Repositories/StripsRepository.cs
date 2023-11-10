@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -20,6 +21,62 @@ namespace StripsDL.Repositories
         public StripsRepository(string connectionString)
         {
             this.connectionString = connectionString;
-        }        
+        }
+
+        public Reeks GeefReeks(int reeksID)
+        {
+            string sql = "SELECT * FROM Reeks WHERE Id=@reeksID";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                try
+                {
+                    conn.Open();
+                    cmd.CommandText = sql;
+                    cmd.Parameters.AddWithValue("@reeksID", reeksID);
+                    IDataReader dr = cmd.ExecuteReader();
+                    dr.Read();
+                    Reeks s = new Reeks((int)dr["Id"], (string)dr["Reeks"]);
+                    dr.Close();
+                    return s;
+                }
+                catch (Exception ex)
+                {
+                    throw new StripsRepositoryException("GeefReeks", ex);
+                }
+            }
+        }
+
+        public List<Strip> GeefStripsVanReeks(int id)
+        {
+            string sql = "SELECT * FROM Strip WHERE Reeks=@id";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                try
+                {
+                    List<Strip> strips = new List<Strip>();
+                    conn.Open();
+                    cmd.CommandText = sql;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Strip strip = new Strip(
+                            (int)reader["Id"],
+                            (string)reader["Titel"],
+                            (int)reader["Nr"]
+                        );
+                        strips.Add(strip);
+                    }
+                    reader.Close();
+                    return strips;
+                }
+                catch (Exception ex)
+                {
+                    throw new StripsRepositoryException("geefstratengemeente", ex);
+                }
+            }
+        }
     }
 }
